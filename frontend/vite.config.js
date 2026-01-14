@@ -6,8 +6,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: 'https://social-post-previewer-backend.onrender.com',
+        changeOrigin: true,
+        secure: true
       }
     }
   }
