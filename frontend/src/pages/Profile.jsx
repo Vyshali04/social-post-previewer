@@ -10,7 +10,7 @@ import {
   Camera,
   Shield
 } from 'lucide-react'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 
 const Profile = () => {
@@ -35,7 +35,7 @@ const Profile = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('/api/posts/stats')
+      const response = await api.get('/api/posts/stats')
       const statsData = response.data
       const statusDraft = statsData.statusBreakdown.find(s => s._id === 'draft')
       const statusPublished = statsData.statusBreakdown.find(s => s._id === 'published')

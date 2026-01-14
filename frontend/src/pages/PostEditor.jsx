@@ -12,7 +12,7 @@ import {
   Tag,
   Calendar
 } from 'lucide-react'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 
 const PostEditorPage = () => {
@@ -43,7 +43,7 @@ const PostEditorPage = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get(`/api/posts/${id}`)
+      const response = await api.get(`/api/posts/${id}`)
       const post = response.data
       setPostData({
         originalContent: post.originalContent || '',
@@ -112,10 +112,10 @@ const PostEditorPage = () => {
 
       let response
       if (id) {
-        response = await axios.put(`/api/posts/${id}`, payload)
+        response = await api.put(`/api/posts/${id}`, payload)
         toast.success(`Post ${status === 'published' ? 'published' : 'updated'} successfully!`)
       } else {
-        response = await axios.post('/api/posts', payload)
+        response = await api.post('/api/posts', payload)
         toast.success(`Post ${status === 'published' ? 'published' : 'saved'} successfully!`)
         
         if (!id) {

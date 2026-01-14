@@ -12,7 +12,7 @@ import {
   Trash2,
   ExternalLink
 } from 'lucide-react'
-import axios from 'axios'
+import api from '../utils/api'
 
 const Dashboard = () => {
   const { user } = useAuth()
@@ -32,8 +32,8 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const [statsResponse, postsResponse] = await Promise.all([
-        axios.get('/api/posts/stats'),
-        axios.get('/api/posts?limit=5')
+        api.get('/api/posts/stats'),
+        api.get('/api/posts?limit=5')
       ])
 
       const statsData = statsResponse.data
@@ -72,7 +72,7 @@ const Dashboard = () => {
     }
 
     try {
-      await axios.delete(`/api/posts/${postId}`)
+      await api.delete(`/api/posts/${postId}`)
       setRecentPosts(recentPosts.filter(post => post._id !== postId))
       fetchDashboardData() // Refresh stats
     } catch (error) {

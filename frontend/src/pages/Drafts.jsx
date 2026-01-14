@@ -14,7 +14,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 
 const Drafts = () => {
@@ -44,7 +44,7 @@ const Drafts = () => {
 
       // Note: In a real app, you'd want to implement search on the backend
       // For now, we'll filter on the frontend
-      const response = await axios.get('/api/posts', { params })
+      const response = await api.get('/api/posts', { params })
       
       let filteredPosts = response.data.posts
       
@@ -72,7 +72,7 @@ const Drafts = () => {
     }
 
     try {
-      await axios.delete(`/api/posts/${postId}`)
+      await api.delete(`/api/posts/${postId}`)
       setPosts(posts.filter(post => post._id !== postId))
       setTotalPosts(totalPosts - 1)
       toast.success('Post deleted successfully')

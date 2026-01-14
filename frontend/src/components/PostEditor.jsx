@@ -8,7 +8,7 @@ import {
   Check,
   RefreshCw
 } from 'lucide-react'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 
 const PostEditor = ({ 
@@ -38,7 +38,7 @@ const PostEditor = ({
 
     setIsGenerating(true)
     try {
-      const response = await axios.post('/api/ai/generate', {
+      const response = await api.post('/api/ai/generate', {
         content,
         tone,
         platform: platforms[0] // Use first selected platform
